@@ -4,8 +4,10 @@ import time
 from locators import MainPageLocators
 
 
+BASE_URL = "https://stellarburgers.nomoreparties.site"
+
 def test_drag_bun_to_cart(driver):
-    driver.get("https://stellarburgers.nomoreparties.site")
+    driver.get(BASE_URL)
     driver.implicitly_wait(4)
 
     # Находим булку и корзину

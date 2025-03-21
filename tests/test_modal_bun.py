@@ -14,6 +14,7 @@ def test_modal_bun(driver):
     # Проверяем, что элемент виден
     assert modal_bun.is_displayed()
 
+    #Ищем крестик и закрываем
     modal_close_button = driver.find_element(*MainPageLocators.CLOSE_MODAL_BUTTON)
     modal_close_button.click()
 
@@ -21,5 +22,6 @@ def test_modal_bun(driver):
 
     # Проверяем, что элемент теперь не виден
     assert not driver.find_element(*MainPageLocators.MODAL_WRAPPER).is_displayed()
+
 
 
