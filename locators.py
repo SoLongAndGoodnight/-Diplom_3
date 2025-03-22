@@ -11,13 +11,10 @@ class LoginPageLocators:
 class ResetPasswordLokators:
     INPUT_EMAIL = (By.XPATH, "//input[@type='text']")
     RESET_BUTTON = (By.XPATH, "//button[text()='Восстановить']")
-    #EYE_SVG = (By.XPATH, "//form//fieldset[1]/div//svg")
     EYE_SVG = (By.CSS_SELECTOR, 'form fieldset:nth-of-type(1) .input__icon svg')
 
 class AccountPageLocators:
     EXIT_BUTTON = (By.XPATH, "//button[text()='Выход']")
-    #ORDER_HISTORY = (By.CSS_SELECTOR, 'nav a:contains("История заказов")')
-    #ORDER_HISTORY = (By.XPATH, '//nav//a[contains(text(), "История заказов")]')
     ORDER_HISTORY = (By.XPATH, '//li[@class="Account_listItem__35dAP"]/a[contains(text(), "История заказов")]')
     ACTIVE_ORDER_HISTORY = (By.XPATH, '//a[contains(@class, "Account_link_active__2opc9")]')
 
@@ -44,5 +41,4 @@ class OrderListsLocators:
     CLOSE_MODAL_BUTTON = (By.XPATH, '//button[@type="button" and contains(@class, "Modal_modal__close")]')
     IN_WORK = (By.XPATH, '//*[contains(@class,"orderListReady")]//li[contains(@class,"digits-default")]')
     ALL_TIME_READY_ORDERS = (By.XPATH, '//p[contains(text(), "Выполнено за все время:")]/following-sibling::p')
-    #TODAY_READY_ORDERS = (By.XPATH, '//*[contains(@class, "OrderFeed_number__2MbrQ text text_type_digits-large")]')
     TODAY_READY_ORDERS = (By.XPATH, '//p[contains(text(), "Выполнено за сегодня:")]/following-sibling::p')
