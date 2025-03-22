@@ -17,6 +17,8 @@ class AccountPageLocators:
     EXIT_BUTTON = (By.XPATH, "//button[text()='Выход']")
     ORDER_HISTORY = (By.XPATH, '//li[@class="Account_listItem__35dAP"]/a[contains(text(), "История заказов")]')
     ACTIVE_ORDER_HISTORY = (By.XPATH, '//a[contains(@class, "Account_link_active__2opc9")]')
+    LAST_ORDER_NUMBER = (By.XPATH, '//ul/li[last()]/a/div[1]/p[contains(@class, "text text_type_digits-default")]')
+
 
 class MainPageLocators:
     BUN = (By.XPATH, '//img[@alt="Флюоресцентная булка R2-D3"]')
