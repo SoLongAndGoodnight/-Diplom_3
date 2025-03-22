@@ -31,13 +31,17 @@ class MainPageLocators:
     CONSTRUCTOR_PAGE = (By.XPATH, '//h1[contains(text(), "Соберите бургер")]')
     CART = (By.CSS_SELECTOR, 'ul[class*="BurgerConstructor_basket__list"]')
     BUN_COUNTER = (By.XPATH, '//p[contains(@class, "counter_counter__num")]')
-    #MODAL_ORDER_NUMBER = (By.XPATH, '//h2[contains(text(), "идентификатор заказа")]')
     MODAL_ORDER_NUMBER = (By.XPATH,'//section//div[1]/div/p[contains(text(), "идентификатор заказа")]')
+    ORDER_NUMBER_FOR_SAVE = (By.XPATH, '//h2[contains(@class, "text_type_digits-large")]')
     BUTTON_COMPLETE_ORDER = (By.XPATH, '//button[contains(text(), "Оформить заказ")]')
+    LIST_FOR_ORDERS = (By.XPATH, '//p[contains(text(), "Лента Заказов")]')
 
 
 class OrderListsLocators:
-    #FIRST_ORDER_IN_LIST = (By.XPATH, '//ul[contains(@class, "your-list-class")]//li[1]')
-    #FIRST_ORDER_IN_LIST = (By.XPATH, '//main//ul[contains(@class, "your-list-class")]//li[1]')
     FIRST_ORDER_IN_LIST = (By.CSS_SELECTOR, 'main ul > li:first-child')
     MODAL_WITH_ORDER_FROM_LIST = (By.XPATH, '//section[2]/div[contains(@class, "Modal_modal__container")]')
+    CLOSE_MODAL_BUTTON = (By.XPATH, '//button[@type="button" and contains(@class, "Modal_modal__close")]')
+    IN_WORK = (By.XPATH, '//*[contains(@class,"orderListReady")]//li[contains(@class,"digits-default")]')
+    ALL_TIME_READY_ORDERS = (By.XPATH, '//*[contains(@class, "OrderFeed_number__2MbrQ text text_type_digits-large")]')
+    TODAY_READY_ORDERS = (By.XPATH, '//*[contains(@class, "OrderFeed_number__2MbrQ text text_type_digits-large")]')
+
