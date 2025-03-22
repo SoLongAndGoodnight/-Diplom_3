@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class LoginPageLocators:
     RESTORE_PASSWORD_LINK = (By.XPATH, "//a[text()='Восстановить пароль']")
     INPUT_EMAIL = (By.XPATH, "//input[@type='text']")
@@ -8,10 +9,12 @@ class LoginPageLocators:
     PROFILE_BUTTON = (By.XPATH, "//a[@href='/account']")
     ACTIVE_EMAIL_FIELD = (By.XPATH, '//label[contains(@class, "input__placeholder-focused")]')
 
+
 class ResetPasswordLokators:
     INPUT_EMAIL = (By.XPATH, "//input[@type='text']")
     RESET_BUTTON = (By.XPATH, "//button[text()='Восстановить']")
     EYE_SVG = (By.CSS_SELECTOR, 'form fieldset:nth-of-type(1) .input__icon svg')
+
 
 class AccountPageLocators:
     EXIT_BUTTON = (By.XPATH, "//button[text()='Выход']")
