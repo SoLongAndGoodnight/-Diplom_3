@@ -1,15 +1,11 @@
 import time
-import pytest
-import requests
 from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators import LoginPageLocators, MainPageLocators, OrderListsLocators
 
-BASE_URL = "https://stellarburgers.nomoreparties.site"
-API_URL = "https://stellarburgers.nomoreparties.site/api"
 
+BASE_URL = "https://stellarburgers.nomoreparties.site"
 
 class TestOrderNumberInAllTimeOrders:
     def test_order_number_in_all_time_orders_calculator(self, driver, unique_user):
@@ -44,7 +40,6 @@ class TestOrderNumberInAllTimeOrders:
 
         actions = ActionChains(driver)
         actions.drag_and_drop(bun, cart).perform()
-        time.sleep(2)
 
         #Оформление заказа и проверка модальника "идентификатор заказа"
         button_order = driver.find_element(*MainPageLocators.BUTTON_COMPLETE_ORDER)
@@ -52,7 +47,7 @@ class TestOrderNumberInAllTimeOrders:
         button_order.click()
         time.sleep(2)
 
-        # Ждём, пока текст обновится и станет не "9999"
+        # Ждём, пока текст обновится и станет не "9999" - это без time.sleep(2) не работает
         WebDriverWait(driver, 7).until(
             lambda d: driver.find_element(*MainPageLocators.ORDER_NUMBER_FOR_SAVE).text != "9999"
         )
@@ -73,7 +68,6 @@ class TestOrderNumberInAllTimeOrders:
 
         WebDriverWait(driver, 3).until(EC.visibility_of_element_located(OrderListsLocators.ALL_TIME_READY_ORDERS))
 
-        #all_time_ready_orders = driver.find_element(*OrderListsLocators.ALL_TIME_READY_ORDERS).text
         # Сохраняем новое количество заказов после оформления
         new_all_time_ready_orders = driver.find_element(*OrderListsLocators.ALL_TIME_READY_ORDERS).text
 

@@ -1,15 +1,11 @@
 import time
-import pytest
-import requests
 from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators import LoginPageLocators, MainPageLocators, OrderListsLocators
 
-BASE_URL = "https://stellarburgers.nomoreparties.site"
-API_URL = "https://stellarburgers.nomoreparties.site/api"
 
+BASE_URL = "https://stellarburgers.nomoreparties.site"
 
 class TestOrderNumber:
     def test_order_number_in_work(self, driver, unique_user):

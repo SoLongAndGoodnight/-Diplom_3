@@ -27,4 +27,4 @@ def test_account_login(driver, unique_user):
 
     # Проверяем, что видна кнопка "Войти"
     submit_button = driver.find_element(*LoginPageLocators.SUBMIT_BUTTON)
-    assert submit_button
+    assert submit_button.is_displayed()

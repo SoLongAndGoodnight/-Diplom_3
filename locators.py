@@ -6,6 +6,7 @@ class LoginPageLocators:
     INPUT_PASSWORD = (By.XPATH, "//input[@type='password']")
     SUBMIT_BUTTON = (By.XPATH, "//button[text()='Войти']")
     PROFILE_BUTTON = (By.XPATH, "//a[@href='/account']")
+    ACTIVE_EMAIL_FIELD = (By.XPATH, '//label[contains(@class, "input__placeholder-focused")]')
 
 class ResetPasswordLokators:
     INPUT_EMAIL = (By.XPATH, "//input[@type='text']")
@@ -42,6 +43,6 @@ class OrderListsLocators:
     MODAL_WITH_ORDER_FROM_LIST = (By.XPATH, '//section[2]/div[contains(@class, "Modal_modal__container")]')
     CLOSE_MODAL_BUTTON = (By.XPATH, '//button[@type="button" and contains(@class, "Modal_modal__close")]')
     IN_WORK = (By.XPATH, '//*[contains(@class,"orderListReady")]//li[contains(@class,"digits-default")]')
-    ALL_TIME_READY_ORDERS = (By.XPATH, '//*[contains(@class, "OrderFeed_number__2MbrQ text text_type_digits-large")]')
-    TODAY_READY_ORDERS = (By.XPATH, '//*[contains(@class, "OrderFeed_number__2MbrQ text text_type_digits-large")]')
-
+    ALL_TIME_READY_ORDERS = (By.XPATH, '//p[contains(text(), "Выполнено за все время:")]/following-sibling::p')
+    #TODAY_READY_ORDERS = (By.XPATH, '//*[contains(@class, "OrderFeed_number__2MbrQ text text_type_digits-large")]')
+    TODAY_READY_ORDERS = (By.XPATH, '//p[contains(text(), "Выполнено за сегодня:")]/following-sibling::p')

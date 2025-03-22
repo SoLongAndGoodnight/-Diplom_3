@@ -1,5 +1,4 @@
 import time
-import pytest
 from locators import LoginPageLocators, AccountPageLocators
 
 BASE_URL = "https://stellarburgers.nomoreparties.site/login"

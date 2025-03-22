@@ -17,17 +17,6 @@ def test_constructor_and_orders_swipe(driver):
     constructor = driver.find_element(*MainPageLocators.CONSTRUCTOR_BUTTON)
     constructor.click()
     constructor_page = driver.find_element(*MainPageLocators.CONSTRUCTOR_PAGE)
+
+    # Проверяем, что элемент 'Конструктор заказов' виден
     assert constructor_page.is_displayed()
-
-
-
-
-    #assert modal_bun.is_displayed()
-
-    # modal_close_button = driver.find_element(*MainPageLocators.CLOSE_MODAL_BUTTON)
-    # modal_close_button.click()
-    #
-    # WebDriverWait(driver, 5).until(EC.invisibility_of_element_located(MainPageLocators.MODAL_WRAPPER))
-    #
-    # # Проверяем, что элемент теперь не виден
-    # assert not driver.find_element(*MainPageLocators.MODAL_WRAPPER).is_displayed()
