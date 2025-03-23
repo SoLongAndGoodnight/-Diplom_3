@@ -6,6 +6,7 @@ import uuid
 BASE_URL = "https://stellarburgers.nomoreparties.site/api"
 
 
+@pytest.fixture
 def driver():
     driver = webdriver.Chrome()  # или webdriver.Firefox() в зависимости от вашего браузера
     driver.maximize_window()
