@@ -64,3 +64,10 @@ class MainPageObject(BasePageObject):
 
     def get_order_number(self):
         return self.driver.find_element(*MainPageLocators.ORDER_NUMBER_FOR_SAVE).text
+
+    def click_orders_button(self):
+        self.driver.find_element(*MainPageLocators.ORDERS_BUTTON).click()
+
+    def order_page_is_displayed(self):
+        orders_page = self.driver.find_element(*MainPageLocators.ORDERS_PAGE)
+        return orders_page.is_displayed()

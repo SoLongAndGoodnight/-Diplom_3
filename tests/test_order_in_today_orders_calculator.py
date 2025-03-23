@@ -21,7 +21,7 @@ class TestOrderNumberInTodayOrders:
             login_page_object.login(unique_user["email"], unique_user["password"])
 
         with allure.step("Кликаем на Лист заказов"):
-            order_page_object.go_to_orders_line()
+            order_page_object.go_to_orders_feed()
 
         with allure.step("запоминаем количество заказов"):
             today_ready_orders = order_page_object.get_today_ready_orders()
@@ -51,7 +51,7 @@ class TestOrderNumberInTodayOrders:
         main_page_object.close_modal()
 
         with allure.step("Кликаем на Лист заказов"):
-            order_page_object.go_to_orders_line()
+            order_page_object.go_to_orders_feed()
 
         with allure.step("Сохраняем новое количество заказов после оформления"):
             new_today_ready_orders = order_page_object.get_today_ready_orders()

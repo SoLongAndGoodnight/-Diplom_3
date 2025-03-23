@@ -1,46 +1,38 @@
 import time
 import allure
-from selenium.webdriver import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from locators import LoginPageLocators, MainPageLocators, OrderListsLocators
-
+from pages.login_page import LoginPageObject
+from pages.main_page import MainPageObject
+from pages.order_page import OrderPageObject
 
 BASE_URL = "https://stellarburgers.nomoreparties.site"
+
 
 class TestOrderNumber:
     @allure.title("Проверка, что после заказа, его номер появляется в работе")
     def test_order_number_in_work(self, driver, unique_user):
-        with allure.step("Логин в аккаунт"):
-            driver.get(f"{BASE_URL}/login")
-            driver.implicitly_wait(4)
+        driver.get(f"{BASE_URL}/login")
+        driver.implicitly_wait(4)
 
-            driver.find_element(*LoginPageLocators.INPUT_EMAIL).send_keys(unique_user["email"])
-            driver.find_element(*LoginPageLocators.INPUT_PASSWORD).send_keys(unique_user["password"])
-            driver.find_element(*LoginPageLocators.SUBMIT_BUTTON).click()
+        login_page_object = LoginPageObject(driver)
+        order_page_object = OrderPageObject(driver)
+        main_page_object = MainPageObject(driver)
+
+        with allure.step("Логин в аккаунт"):
+            login_page_object.login(unique_user["email"], unique_user["password"])
 
         with allure.step("перетаскивание булки"):
             time.sleep(2)
-            bun = driver.find_element(*MainPageLocators.BUN)
-            cart = driver.find_element(*MainPageLocators.CART)
-
-            actions = ActionChains(driver)
-            actions.drag_and_drop(bun, cart).perform()
-            time.sleep(2)
+            main_page_object.drag_and_drop_bun_to_cart()
 
         with allure.step("Оформление заказа и проверка модальника 'идентификатор заказа'"):
-            button_order = driver.find_element(*MainPageLocators.BUTTON_COMPLETE_ORDER)
-
-            button_order.click()
+            main_page_object.complete_order()
             time.sleep(2)
 
         with allure.step("Ждём, пока текст обновится и станет не '9999'"):
-            WebDriverWait(driver, 7).until(
-                lambda d: driver.find_element(*MainPageLocators.ORDER_NUMBER_FOR_SAVE).text != "9999"
-            )
+            main_page_object.wait_for_order_number_updated()
 
         with allure.step("Сохраняем текст из веб-элемента в переменную"):
-            order_number = driver.find_element(*MainPageLocators.ORDER_NUMBER_FOR_SAVE).text
+            order_number = main_page_object.get_order_number()
 
         with allure.step("Принтим номер заказа"):
             print(f"Номер заказа: {order_number}")
@@ -49,17 +41,12 @@ class TestOrderNumber:
             assert order_number.isnumeric(), "Номер заказа должен быть числом!"
             assert order_number != "9999", "Номер заказа не должен быть 9999!"
 
-            driver.find_element(*MainPageLocators.CLOSE_MODAL_BUTTON).click()
-
-        with allure.step("Явное ожидание, чтобы элемент гарантированно был кликабельным"):
-            WebDriverWait(driver, 10).until(EC.element_to_be_clickable(MainPageLocators.LIST_FOR_ORDERS))
+            main_page_object.close_modal()
 
         with allure.step("Кликаем на Лист заказов"):
-            driver.find_element(*MainPageLocators.LIST_FOR_ORDERS).click()
+            order_page_object.go_to_orders_feed()
 
-        WebDriverWait(driver, 3).until(EC.visibility_of_element_located(OrderListsLocators.IN_WORK))
-
-        orders_in_work = driver.find_element(*OrderListsLocators.IN_WORK).text
+        orders_in_work = order_page_object.get_orders_in_work()
 
         with allure.step("Проверяем, что наш номер заказа есть в этом списке"):
             assert order_number in orders_in_work, f"Номер заказа {order_number} не найден в списке 'В работе'!"

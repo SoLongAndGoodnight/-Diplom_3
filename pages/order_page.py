@@ -8,7 +8,7 @@ class OrderPageObject:
     def __init__(self, driver):
         self.driver = driver
 
-    def go_to_orders_line(self):
+    def go_to_orders_feed(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.LIST_FOR_ORDERS))
         self.driver.find_element(*MainPageLocators.LIST_FOR_ORDERS).click()
 
@@ -33,3 +33,15 @@ class OrderPageObject:
     def get_today_ready_orders(self):
         WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(OrderListsLocators.TODAY_READY_ORDERS))
         return self.driver.find_element(*OrderListsLocators.TODAY_READY_ORDERS).text
+
+    def get_orders_in_work(self):
+        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(OrderListsLocators.IN_WORK))
+
+        return self.driver.find_element(*OrderListsLocators.IN_WORK).text
+
+    def click_first_order_in_feed(self):
+        self.driver.find_element(*OrderListsLocators.FIRST_ORDER_IN_LIST).click()
+
+    def modal_with_order_from_list_displayed(self):
+        modal_with_order_from_list = self.driver.find_element(*OrderListsLocators.MODAL_WITH_ORDER_FROM_LIST)
+        return modal_with_order_from_list.is_displayed()

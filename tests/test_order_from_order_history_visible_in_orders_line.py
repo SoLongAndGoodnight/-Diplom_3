@@ -47,7 +47,7 @@ class TestOrder:
             print(f"Номер последнего заказа: {last_order_number}")
 
         with allure.step("Переходим в ленту заказов"):
-            order_page_object.go_to_orders_line()
+            order_page_object.go_to_orders_feed()
 
         with allure.step("Ожидаем появления заказа с нашим номером в ленте заказов"):
             order_page_object.wait_for_order_number_in_orders_line_is_visible(last_order_number)
