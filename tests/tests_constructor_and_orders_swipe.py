@@ -1,4 +1,3 @@
-from locators import MainPageLocators
 import allure
 
 from pages.main_page import MainPageObject

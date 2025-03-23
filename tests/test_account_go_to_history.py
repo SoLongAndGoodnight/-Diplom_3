@@ -9,9 +9,8 @@ BASE_URL = "https://stellarburgers.nomoreparties.site/login"
 class TestAccountGoToHistory:
     @allure.title("Проверка, что пользователь может зайти в историю заказов")
     def test_account_go_to_history(self, driver, unique_user):
-        with allure.step("Авторизация пользователя"):
-            driver.get(BASE_URL)
-            driver.implicitly_wait(4)
+        driver.get(BASE_URL)
+        driver.implicitly_wait(4)
 
         login_page_object = LoginPageObject(driver)
         account_page_object = AccountPageObject(driver)

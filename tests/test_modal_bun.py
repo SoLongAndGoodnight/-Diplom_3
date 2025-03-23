@@ -5,6 +5,7 @@ from pages.main_page import MainPageObject
 
 BASE_URL = "https://stellarburgers.nomoreparties.site"
 
+
 class TestModalBun:
     @allure.title("Проверка отображения модальника ингридиента 'Bun'")
     def test_modal_bun(self, driver):

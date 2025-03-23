@@ -3,25 +3,16 @@ from selenium import webdriver
 import requests
 import uuid
 
-@pytest.fixture
-#def driver():
-    #return webdriver.Chrome()
-    #driver.maximize_window()
-    #yield
-    #
+BASE_URL = "https://stellarburgers.nomoreparties.site/api"
 
 
 def driver():
-    # Создание экземпляра WebDriver
     driver = webdriver.Chrome()  # или webdriver.Firefox() в зависимости от вашего браузера
     driver.maximize_window()
-    yield driver  # Возвращаем драйвер тесту и приостанавливаем фикстуру
+    yield driver
 
-    # Завершение работы драйвера после выполнения теста
     driver.quit()
 
-
-BASE_URL = "https://stellarburgers.nomoreparties.site/api"
 
 @pytest.fixture
 def unique_user():

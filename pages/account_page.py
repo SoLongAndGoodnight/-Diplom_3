@@ -1,3 +1,6 @@
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from locators import AccountPageLocators
 
 from .base import BasePageObject
@@ -13,10 +16,8 @@ class AccountPageObject(BasePageObject):
     def active_link(self):
         return self.driver.find_element(*AccountPageLocators.ACTIVE_ORDER_HISTORY).is_displayed()
 
-    def exit_button_locator(self):
-        return AccountPageLocators.EXIT_BUTTON
-
-    def is_exit_button_visible(self):
+    def exit_button_displayed(self):
+        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(AccountPageLocators.EXIT_BUTTON))
         return self.driver.find_element(*AccountPageLocators.EXIT_BUTTON).is_displayed()
 
     def get_last_order_number(self):

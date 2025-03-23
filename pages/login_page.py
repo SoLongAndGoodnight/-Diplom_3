@@ -27,11 +27,8 @@ class LoginPageObject(BasePageObject):
     def check_submit_button_visible(self):
          return self.driver.find_element(*LoginPageLocators.SUBMIT_BUTTON).is_displayed()
 
-    def profile_button_locator(self):
-        return LoginPageLocators.PROFILE_BUTTON
-
     def go_to_profile(self):
-        """Переход в профиль через кнопку 'Личный кабинет'."""
+        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(LoginPageLocators.PROFILE_BUTTON))
         self.driver.find_element(*LoginPageLocators.PROFILE_BUTTON).click()
 
     def click_restore_password(self):

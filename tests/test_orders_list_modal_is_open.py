@@ -1,4 +1,3 @@
-from locators import MainPageLocators, OrderListsLocators
 import allure
 
 from pages.main_page import MainPageObject

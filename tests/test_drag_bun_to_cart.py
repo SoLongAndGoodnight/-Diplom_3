@@ -2,8 +2,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 import allure
 from pages.main_page import MainPageObject
 
-
 BASE_URL = "https://stellarburgers.nomoreparties.site"
+
 
 class TestDragBunToCart:
     @allure.title("Проверка перетаскивания булочки в корзину")
