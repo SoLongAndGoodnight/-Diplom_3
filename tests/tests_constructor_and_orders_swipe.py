@@ -1,7 +1,10 @@
 from locators import MainPageLocators
 import allure
 
+from pages.main_page import MainPageObject
+
 BASE_URL = "https://stellarburgers.nomoreparties.site"
+
 
 class TestSwipeConstructorAndOrdersPage:
     @allure.title("Проверка перехода по разделам 'Конструктор бургеров' и 'Лента заказов'")
@@ -9,17 +12,16 @@ class TestSwipeConstructorAndOrdersPage:
         driver.get(BASE_URL)
         driver.implicitly_wait(4)
 
+        main_page_object = MainPageObject(driver)
+
         with allure.step("Ищем кнопку 'Лента заказов'"):
-            orders = driver.find_element(*MainPageLocators.ORDERS_BUTTON)
-            orders.click()
-        orders_page = driver.find_element(*MainPageLocators.ORDERS_PAGE)
+            main_page_object.click_orders_button()
+
         with allure.step("Проверяем, что элемент 'Лента заказов' виден"):
-            assert orders_page.is_displayed()
+            assert main_page_object.order_page_is_displayed()
 
         with allure.step("Ищем кнопку 'Конструктор бургеров'"):
-            constructor = driver.find_element(*MainPageLocators.CONSTRUCTOR_BUTTON)
-            constructor.click()
-            constructor_page = driver.find_element(*MainPageLocators.CONSTRUCTOR_PAGE)
+            main_page_object.go_to_constructor()
 
         with allure.step("Проверяем, что элемент 'Конструктор заказов' виден"):
-            assert constructor_page.is_displayed()
+            main_page_object.constructor_page_is_displayed()

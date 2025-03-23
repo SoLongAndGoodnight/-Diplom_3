@@ -10,7 +10,7 @@ class LoginPageLocators:
     ACTIVE_EMAIL_FIELD = (By.XPATH, '//label[contains(@class, "input__placeholder-focused")]')
 
 
-class ResetPasswordLokators:
+class ResetPasswordLocators:
     INPUT_EMAIL = (By.XPATH, "//input[@type='text']")
     RESET_BUTTON = (By.XPATH, "//button[text()='Восстановить']")
     EYE_SVG = (By.CSS_SELECTOR, 'form fieldset:nth-of-type(1) .input__icon svg')

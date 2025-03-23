@@ -3,11 +3,10 @@ from locators import MainPageLocators, OrderListsLocators
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from .base import BasePageObject
 
-class OrderPageObject:
-    def __init__(self, driver):
-        self.driver = driver
 
+class OrderPageObject(BasePageObject):
     def go_to_orders_feed(self):
         WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.LIST_FOR_ORDERS))
         self.driver.find_element(*MainPageLocators.LIST_FOR_ORDERS).click()

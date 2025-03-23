@@ -33,3 +33,12 @@ class LoginPageObject(BasePageObject):
     def go_to_profile(self):
         """Переход в профиль через кнопку 'Личный кабинет'."""
         self.driver.find_element(*LoginPageLocators.PROFILE_BUTTON).click()
+
+    def click_restore_password(self):
+        self.driver.find_element(*LoginPageLocators.RESTORE_PASSWORD_LINK).click()
+
+    def email_field_displayed_and_enabled(self):
+        WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(LoginPageLocators.ACTIVE_EMAIL_FIELD))
+
+        password_input = self.driver.find_element(*LoginPageLocators.ACTIVE_EMAIL_FIELD)
+        return password_input.is_displayed() and password_input.is_enabled()

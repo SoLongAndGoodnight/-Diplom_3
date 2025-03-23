@@ -71,3 +71,7 @@ class MainPageObject(BasePageObject):
     def order_page_is_displayed(self):
         orders_page = self.driver.find_element(*MainPageLocators.ORDERS_PAGE)
         return orders_page.is_displayed()
+
+    def constructor_page_is_displayed(self):
+        constructor_page = self.driver.find_element(*MainPageLocators.CONSTRUCTOR_PAGE)
+        assert constructor_page.is_displayed()
