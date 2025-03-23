@@ -16,10 +16,10 @@ class MainPageObject(BasePageObject):
 
         actions = ActionChains(self.driver)
         actions.drag_and_drop(bun, cart).perform()
-        time.sleep(2)
 
     def complete_order(self):
         self.driver.find_element(*MainPageLocators.BUTTON_COMPLETE_ORDER).click()
+        time.sleep(3)
 
     def complete_order_and_check_modal(self):
         self.complete_order()
@@ -42,7 +42,7 @@ class MainPageObject(BasePageObject):
         return self.driver.find_element(*MainPageLocators.MODAL_BUN).is_displayed()
 
     def close_modal(self):
-        WebDriverWait(self.driver, 3).until(EC.element_to_be_clickable(MainPageLocators.CLOSE_MODAL_BUTTON))
+        WebDriverWait(self.driver, 4).until(EC.element_to_be_clickable(MainPageLocators.CLOSE_MODAL_BUTTON))
         self.driver.find_element(*MainPageLocators.CLOSE_MODAL_BUTTON).click()
 
     def modal_wrapper_locator(self):

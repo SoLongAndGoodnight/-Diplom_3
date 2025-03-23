@@ -25,9 +25,7 @@ class TestAccountGoToHistory:
             login_page_object.click_submit_button()
 
         with allure.step("Ждём загрузку профиля и переходим в аккаунт"):
-            time.sleep(4)
             login_page_object.click_profile_button()
-            time.sleep(3)
 
             account_page_object.click_order_history()
 

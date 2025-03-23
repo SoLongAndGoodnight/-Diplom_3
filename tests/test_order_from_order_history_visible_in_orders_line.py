@@ -28,13 +28,11 @@ class TestOrder:
 
         with allure.step("Драг энд дроп булочки"):
             main_page_object.drag_and_drop_bun_to_cart()
-            time.sleep(2)
 
         with allure.step("Оформление заказа и проверка модальника 'идентификатор заказа'"):
             main_page_object.complete_order()
-            time.sleep(3)
 
-        with allure.step("закрываем модальник, без time.sleep не работает"):
+        with allure.step("закрываем модальник"):
             main_page_object.close_modal()
 
         with allure.step("Идем в личный кабинет"):

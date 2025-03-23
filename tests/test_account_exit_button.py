@@ -25,9 +25,7 @@ class TestAccountLogin:
             login_page_object.click_submit_button()
 
         with allure.step("Ждём загрузку профиля и переходим в аккаунт"):
-            time.sleep(4)
             login_page_object.click_profile_button()
-            time.sleep(3)
 
         with allure.step("Находим кнопку выхода и кликаем"):
             account_page_object.click_exit_button()
