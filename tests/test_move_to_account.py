@@ -1,7 +1,6 @@
 import allure
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from locators import LoginPageLocators, AccountPageLocators
 from pages.login_page import LoginPageObject
 from pages.account_page import AccountPageObject
 

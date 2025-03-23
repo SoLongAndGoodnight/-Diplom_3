@@ -1,10 +1,4 @@
-import time
 import allure
-from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from locators import LoginPageLocators, MainPageLocators
 from pages.login_page import LoginPageObject
 from pages.main_page import MainPageObject
 
@@ -29,7 +23,7 @@ class TestCreateOrder:
             login_page_object.fill_password_field(input_password)
             login_page_object.click_submit_button()
 
-            main_page_object.waiting_element_bun()
+            main_page_object.wait_for_bun()
 
         with allure.step("перетаскивание булки"):
             main_page_object.drag_and_drop_bun_to_cart()

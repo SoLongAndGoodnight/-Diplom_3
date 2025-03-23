@@ -7,7 +7,7 @@ from selenium.webdriver import ActionChains
 
 
 class MainPageObject(BasePageObject):
-    def waiting_element_bun(self):
+    def wait_for_bun(self):
         WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(MainPageLocators.BUN))
 
     def drag_and_drop_bun_to_cart(self):
@@ -53,3 +53,14 @@ class MainPageObject(BasePageObject):
 
     def check_bun_is_visible(self):
         WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(MainPageLocators.BUN))
+
+    def go_to_constructor(self):
+        self.driver.find_element(*MainPageLocators.CONSTRUCTOR_BUTTON).click()
+
+    def wait_for_order_number_updated(self):
+        WebDriverWait(self.driver, 7).until(
+            lambda d: self.driver.find_element(*MainPageLocators.ORDER_NUMBER_FOR_SAVE).text != "9999"
+        )
+
+    def get_order_number(self):
+        return self.driver.find_element(*MainPageLocators.ORDER_NUMBER_FOR_SAVE).text

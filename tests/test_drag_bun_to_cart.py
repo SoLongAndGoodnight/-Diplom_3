@@ -1,8 +1,5 @@
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
-import time
 import allure
-from locators import MainPageLocators
 from pages.main_page import MainPageObject
 
 

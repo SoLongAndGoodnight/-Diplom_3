@@ -1,10 +1,5 @@
 import time
 import allure
-from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from locators import LoginPageLocators, MainPageLocators, AccountPageLocators
 from pages.login_page import LoginPageObject
 from pages.main_page import MainPageObject
 from pages.account_page import AccountPageObject

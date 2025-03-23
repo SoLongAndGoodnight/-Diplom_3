@@ -1,6 +1,5 @@
 import time
 import allure
-from locators import LoginPageLocators, AccountPageLocators
 from pages.login_page import LoginPageObject
 from pages.account_page import AccountPageObject
 

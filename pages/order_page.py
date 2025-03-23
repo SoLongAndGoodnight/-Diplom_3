@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from locators import MainPageLocators
+from locators import MainPageLocators, OrderListsLocators
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -9,6 +9,7 @@ class OrderPageObject:
         self.driver = driver
 
     def go_to_orders_line(self):
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.LIST_FOR_ORDERS))
         self.driver.find_element(*MainPageLocators.LIST_FOR_ORDERS).click()
 
     def is_order_in_feed(self, order_number):
@@ -24,3 +25,11 @@ class OrderPageObject:
         )
 
         self.driver.find_element(*order_locator).is_displayed()
+
+    def get_all_time_ready_orders_count(self):
+        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(OrderListsLocators.ALL_TIME_READY_ORDERS))
+        return self.driver.find_element(*OrderListsLocators.ALL_TIME_READY_ORDERS).text
+
+    def get_today_ready_orders(self):
+        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(OrderListsLocators.TODAY_READY_ORDERS))
+        return self.driver.find_element(*OrderListsLocators.TODAY_READY_ORDERS).text
