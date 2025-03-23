@@ -32,7 +32,7 @@ class TestCreateOrder:
             main_page_object.waiting_element_bun()
 
         with allure.step("перетаскивание булки"):
-            main_page_object.drag_and_drop()
+            main_page_object.drag_and_drop_bun_to_cart()
 
         with allure.step("Оформление заказа и проверка модальника 'идентификатор заказа'"):
             assert main_page_object.complete_order_and_check_modal()

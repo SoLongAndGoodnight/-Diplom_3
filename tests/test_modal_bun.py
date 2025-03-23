@@ -2,6 +2,7 @@ from locators import MainPageLocators
 import allure
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from pages.main_page import MainPageObject
 
 BASE_URL = "https://stellarburgers.nomoreparties.site"
 
@@ -11,19 +12,13 @@ class TestModalBun:
         driver.get(BASE_URL)
         driver.implicitly_wait(4)
 
-        with allure.step("Кликаем на ингридиент"):
-            bun = driver.find_element(*MainPageLocators.BUN)
-            bun.click()
-            modal_bun = driver.find_element(*MainPageLocators.MODAL_BUN)
-        with allure.step("Проверяем, что элемент виден"):
-            assert modal_bun.is_displayed()
+        main_page = MainPageObject(driver)
 
-        with allure.step("Ищем крестик и закрываем"):
-            modal_close_button = driver.find_element(*MainPageLocators.CLOSE_MODAL_BUTTON)
-            modal_close_button.click()
+        with allure.step("Кликаем на ингредиент"):
+            main_page.click_bun()
+            assert main_page.is_modal_open(), "Модальное окно булки не открылось!"
 
-            WebDriverWait(driver, 5).until(EC.invisibility_of_element_located(MainPageLocators.MODAL_WRAPPER))
-
-        with allure.step("Проверяем, что элемент теперь не виден"):
-            assert not driver.find_element(*MainPageLocators.MODAL_WRAPPER).is_displayed()
-
+        with allure.step("Закрываем модальное окно через крестик"):
+            main_page.close_modal()
+            WebDriverWait(driver, 5).until(EC.invisibility_of_element_located(main_page.modal_wrapper_locator()))
+            assert main_page.is_modal_closed(), "Модальное окно булки не закрылось!"

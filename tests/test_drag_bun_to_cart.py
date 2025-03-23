@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 import time
 import allure
 from locators import MainPageLocators
+from pages.main_page import MainPageObject
 
 
 BASE_URL = "https://stellarburgers.nomoreparties.site"
@@ -13,19 +14,14 @@ class TestDragBunToCart:
         driver.get(BASE_URL)
         driver.implicitly_wait(4)
 
-        with allure.step("Находим булку и корзину"):
-            bun = driver.find_element(*MainPageLocators.BUN)
-            cart = driver.find_element(*MainPageLocators.CART)
+        main_page = MainPageObject(driver)
 
-        with allure.step("Проверяем количество булок до перетаскивания"):
-            counter = driver.find_element(*MainPageLocators.BUN_COUNTER)
-            assert counter.text == "0"
+        with allure.step("Проверяем, что счетчик булок равен 0"):
+            assert main_page.get_bun_counter() == "0", "Счетчик булок не равен 0 при старте!"
 
-        with allure.step("Создаём действие — перетаскиваем булку в корзину"):
-            actions = ActionChains(driver)
-            actions.drag_and_drop(bun, cart).perform()
-            time.sleep(2)
+        with allure.step("Перетаскиваем булку в корзину"):
+            main_page.drag_and_drop_bun_to_cart()
 
-        with allure.step("Проверяем, что количество булок увеличилось"):
-            WebDriverWait(driver, 5).until(lambda d: counter.text == "2")
-            assert counter.text == "2", "Счетчик не увеличился до 2!"
+        with allure.step("Проверяем, что счетчик булок увеличился до 2"):
+            WebDriverWait(driver, 5).until(lambda d: main_page.get_bun_counter() == "2")
+            assert main_page.get_bun_counter() == "2", "Счетчик не увеличился до 2!"
