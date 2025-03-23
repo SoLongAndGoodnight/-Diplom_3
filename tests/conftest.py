@@ -1,18 +1,42 @@
-import pytest
-from selenium import webdriver
 import requests
 import uuid
+
+import pytest
+from selenium import webdriver
 
 BASE_URL = "https://stellarburgers.nomoreparties.site/api"
 
 
 @pytest.fixture
-def driver():
-    driver = webdriver.Chrome()  # или webdriver.Firefox() в зависимости от вашего браузера
+def driver(request):
+    browser = request.config.getoption("--browser")
+
+    if browser == "chrome":
+        options = webdriver.ChromeOptions()
+        options.add_argument("--start-maximized")
+        driver = webdriver.Chrome(options=options)
+
+    elif browser == "firefox":
+        options = webdriver.FirefoxOptions()
+        options.add_argument("--start-maximized")
+        driver = webdriver.Firefox(options=options)
+
+    else:
+        raise ValueError("Укажи браузер: --browser=chrome или --browser=firefox")
+
     driver.maximize_window()
     yield driver
 
     driver.quit()
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browser",
+        action="store",
+        default="chrome",
+        help="Выбор браузера: chrome или firefox",
+    )
 
 
 @pytest.fixture
