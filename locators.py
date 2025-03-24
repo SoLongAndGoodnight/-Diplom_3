@@ -47,3 +47,11 @@ class OrderListsLocators:
     IN_WORK = (By.XPATH, '//*[contains(@class,"orderListReady")]//li[contains(@class,"digits-default")]')
     ALL_TIME_READY_ORDERS = (By.XPATH, '//p[contains(text(), "Выполнено за все время:")]/following-sibling::p')
     TODAY_READY_ORDERS = (By.XPATH, '//p[contains(text(), "Выполнено за сегодня:")]/following-sibling::p')
+
+    @staticmethod
+    def get_order_number_locator(order_number):
+        return By.XPATH, f'//ul/li/a/div[1]/p[contains(text(), "{order_number}")]'
+
+    @staticmethod
+    def get_last_order_number_locator(last_order_number):
+        return By.XPATH, f'//ul/li/a/div[1]/p[contains(text(), "{last_order_number}")]'

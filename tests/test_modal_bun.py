@@ -1,6 +1,4 @@
 import allure
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from pages.main_page import MainPageObject
 
 BASE_URL = "https://stellarburgers.nomoreparties.site"
@@ -20,5 +18,4 @@ class TestModalBun:
 
         with allure.step("Закрываем модальное окно через крестик"):
             main_page.close_modal()
-            WebDriverWait(driver, 5).until(EC.invisibility_of_element_located(main_page.modal_wrapper_locator()))
             assert main_page.is_modal_closed(), "Модальное окно булки не закрылось!"

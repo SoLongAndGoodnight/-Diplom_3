@@ -1,4 +1,5 @@
 import time
+
 import allure
 from pages.login_page import LoginPageObject
 from pages.main_page import MainPageObject
@@ -31,6 +32,9 @@ class TestOrder:
 
         with allure.step("Оформление заказа и проверка модальника 'идентификатор заказа'"):
             main_page_object.complete_order()
+
+        # NOTE: костыль для предотвращения получения ошибки ElementClickInterceptedException
+        time.sleep(3)
 
         with allure.step("закрываем модальник"):
             main_page_object.close_modal()

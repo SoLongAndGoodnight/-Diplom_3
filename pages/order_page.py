@@ -1,46 +1,33 @@
-from selenium.webdriver.common.by import By
 from locators import MainPageLocators, OrderListsLocators
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
 from .base import BasePageObject
 
 
 class OrderPageObject(BasePageObject):
     def go_to_orders_feed(self):
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.LIST_FOR_ORDERS))
-        self.driver.find_element(*MainPageLocators.LIST_FOR_ORDERS).click()
+        self.find_visible_element_by_locator(MainPageLocators.LIST_FOR_ORDERS, timeout=10).click()
 
     def is_order_in_feed(self, order_number):
-        order_locator = (By.XPATH, f'//ul/li/a/div[1]/p[contains(text(), "{order_number}")]')
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(order_locator))
-        return self.driver.find_element(*order_locator).is_displayed()
+        return self.find_visible_element_by_locator(
+            OrderListsLocators.get_order_number_locator(order_number), timeout=5
+        ).is_displayed()
 
     def wait_for_order_number_in_orders_line_is_visible(self, last_order_number):
-        order_locator = (By.XPATH, f'//ul/li/a/div[1]/p[contains(text(), "{last_order_number}")]')
-
-        WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located(order_locator)
-        )
-
-        self.driver.find_element(*order_locator).is_displayed()
+        self.find_visible_element_by_locator(
+            OrderListsLocators.get_last_order_number_locator(last_order_number), timeout=5
+        ).is_displayed()
 
     def get_all_time_ready_orders_count(self):
-        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(OrderListsLocators.ALL_TIME_READY_ORDERS))
-        return self.driver.find_element(*OrderListsLocators.ALL_TIME_READY_ORDERS).text
+        return self.find_element_by_locator(OrderListsLocators.ALL_TIME_READY_ORDERS).text
 
     def get_today_ready_orders(self):
-        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(OrderListsLocators.TODAY_READY_ORDERS))
-        return self.driver.find_element(*OrderListsLocators.TODAY_READY_ORDERS).text
+        return self.find_element_by_locator(OrderListsLocators.TODAY_READY_ORDERS).text
 
     def get_orders_in_work(self):
-        WebDriverWait(self.driver, 3).until(EC.visibility_of_element_located(OrderListsLocators.IN_WORK))
-
-        return self.driver.find_element(*OrderListsLocators.IN_WORK).text
+        return self.find_element_by_locator(OrderListsLocators.IN_WORK).text
 
     def click_first_order_in_feed(self):
-        self.driver.find_element(*OrderListsLocators.FIRST_ORDER_IN_LIST).click()
+        return self.find_visible_element_by_locator(OrderListsLocators.FIRST_ORDER_IN_LIST).click()
 
     def modal_with_order_from_list_displayed(self):
-        modal_with_order_from_list = self.driver.find_element(*OrderListsLocators.MODAL_WITH_ORDER_FROM_LIST)
+        modal_with_order_from_list = self.find_element_by_locator(OrderListsLocators.MODAL_WITH_ORDER_FROM_LIST)
         return modal_with_order_from_list.is_displayed()
