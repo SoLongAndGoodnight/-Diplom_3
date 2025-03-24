@@ -5,16 +5,13 @@ from pages.login_page import LoginPageObject
 from pages.main_page import MainPageObject
 from pages.account_page import AccountPageObject
 from pages.order_page import OrderPageObject
-
-BASE_URL = "https://stellarburgers.nomoreparties.site"
-API_URL = "https://stellarburgers.nomoreparties.site/api"
+from urls import LOGIN_URL
 
 
 class TestOrder:
     @allure.title("Проверка того, что заказы пользователя из раздела «История заказов» отображаются на странице «Лента заказов»")
     def test_order_from_order_history_visible_in_orders_line(self, driver, unique_user):
-        driver.get(f"{BASE_URL}/login")
-        driver.implicitly_wait(4)
+        driver.get(LOGIN_URL)
 
         login_page_object = LoginPageObject(driver)
         main_page_object = MainPageObject(driver)
@@ -22,7 +19,10 @@ class TestOrder:
         order_page_object = OrderPageObject(driver)
 
         with allure.step("Логин в аккаунт"):
-            login_page_object.login(unique_user["email"], unique_user["password"])
+            input_email = unique_user["email"]
+            input_password = unique_user["password"]
+
+            login_page_object.login(input_email, input_password)
 
         with allure.step("Проверка видимости веб элемента булочка"):
             main_page_object.check_bun_is_visible()
@@ -45,8 +45,6 @@ class TestOrder:
         with allure.step("Переходим в Историю заказов"):
             account_page_object.click_order_history()
             last_order_number = account_page_object.get_last_order_number()
-
-            print(f"Номер последнего заказа: {last_order_number}")
 
         with allure.step("Переходим в ленту заказов"):
             order_page_object.go_to_orders_feed()

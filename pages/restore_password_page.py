@@ -8,4 +8,4 @@ class RestorePasswordPageObject(BasePageObject):
         self.find_element_by_locator(ResetPasswordLocators.RESET_BUTTON).click()
 
     def click_on_eye(self):
-        self.find_element_by_locator(ResetPasswordLocators.EYE_SVG).click()
+        self.find_visible_element_by_locator(ResetPasswordLocators.EYE_SVG).click()

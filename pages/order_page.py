@@ -17,13 +17,13 @@ class OrderPageObject(BasePageObject):
         ).is_displayed()
 
     def get_all_time_ready_orders_count(self):
-        return self.find_element_by_locator(OrderListsLocators.ALL_TIME_READY_ORDERS).text
+        return self.find_visible_element_by_locator(OrderListsLocators.ALL_TIME_READY_ORDERS, timeout=5).text
 
     def get_today_ready_orders(self):
-        return self.find_element_by_locator(OrderListsLocators.TODAY_READY_ORDERS).text
+        return self.find_visible_element_by_locator(OrderListsLocators.TODAY_READY_ORDERS).text
 
     def get_orders_in_work(self):
-        return self.find_element_by_locator(OrderListsLocators.IN_WORK).text
+        return self.find_visible_element_by_locator(OrderListsLocators.IN_WORK).text
 
     def click_first_order_in_feed(self):
         return self.find_visible_element_by_locator(OrderListsLocators.FIRST_ORDER_IN_LIST).click()

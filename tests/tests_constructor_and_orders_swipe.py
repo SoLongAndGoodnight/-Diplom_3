@@ -1,15 +1,13 @@
 import allure
 
 from pages.main_page import MainPageObject
-
-BASE_URL = "https://stellarburgers.nomoreparties.site"
+from urls import BASE_URL
 
 
 class TestSwipeConstructorAndOrdersPage:
     @allure.title("Проверка перехода по разделам 'Конструктор бургеров' и 'Лента заказов'")
     def test_constructor_and_orders_swipe(self, driver):
         driver.get(BASE_URL)
-        driver.implicitly_wait(4)
 
         main_page_object = MainPageObject(driver)
 

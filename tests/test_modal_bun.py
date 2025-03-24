@@ -1,14 +1,12 @@
 import allure
 from pages.main_page import MainPageObject
-
-BASE_URL = "https://stellarburgers.nomoreparties.site"
+from urls import BASE_URL
 
 
 class TestModalBun:
     @allure.title("Проверка отображения модальника ингридиента 'Bun'")
     def test_modal_bun(self, driver):
         driver.get(BASE_URL)
-        driver.implicitly_wait(4)
 
         main_page = MainPageObject(driver)
 

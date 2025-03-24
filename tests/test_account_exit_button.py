@@ -1,28 +1,22 @@
-import time
 import allure
 from pages.login_page import LoginPageObject
 from pages.account_page import AccountPageObject
-
-BASE_URL = "https://stellarburgers.nomoreparties.site/login"
+from urls import LOGIN_URL
 
 
 class TestAccountLogin:
     @allure.title("Проверка, что можно войти и выйти из аккаунта")
     def test_account_login(self, driver, unique_user):
-        driver.get(BASE_URL)
-        driver.implicitly_wait(4)
+        driver.get(LOGIN_URL)
 
         login_page_object = LoginPageObject(driver)
         account_page_object = AccountPageObject(driver)
 
-        with allure.step("Получаем данные уникального пользователя из API фикстуры"):
+        with allure.step("Находим элементы и выполняем логин"):
             input_email = unique_user["email"]
             input_password = unique_user["password"]
 
-        with allure.step("Находим элементы и выполняем логин"):
-            login_page_object.fill_login_field(input_email)
-            login_page_object.fill_password_field(input_password)
-            login_page_object.click_submit_button()
+            login_page_object.login(input_email, input_password)
 
         with allure.step("Ждём загрузку профиля и переходим в аккаунт"):
             login_page_object.click_profile_button()

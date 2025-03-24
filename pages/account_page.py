@@ -4,10 +4,11 @@ from .base import BasePageObject
 
 class AccountPageObject(BasePageObject):
     def click_exit_button(self):
-        self.find_element_by_locator(AccountPageLocators.EXIT_BUTTON).click()
+        element = self.find_visible_element_by_locator(AccountPageLocators.EXIT_BUTTON)
+        element.click()
 
     def click_order_history(self):
-        self.find_element_by_locator(AccountPageLocators.ORDER_HISTORY).click()
+        self.find_visible_element_by_locator(AccountPageLocators.ORDER_HISTORY).click()
 
     def active_link(self):
         return self.find_element_by_locator(AccountPageLocators.ACTIVE_ORDER_HISTORY).is_displayed()
@@ -16,4 +17,4 @@ class AccountPageObject(BasePageObject):
         return self.find_visible_element_by_locator(AccountPageLocators.EXIT_BUTTON).is_displayed()
 
     def get_last_order_number(self):
-        return self.find_element_by_locator(AccountPageLocators.LAST_ORDER_NUMBER).text
+        return self.find_visible_element_by_locator(AccountPageLocators.LAST_ORDER_NUMBER).text

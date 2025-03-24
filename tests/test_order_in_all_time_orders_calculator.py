@@ -3,22 +3,23 @@ import allure
 from pages.login_page import LoginPageObject
 from pages.main_page import MainPageObject
 from pages.order_page import OrderPageObject
-
-BASE_URL = "https://stellarburgers.nomoreparties.site"
+from urls import LOGIN_URL
 
 
 class TestOrderNumberInAllTimeOrders:
     @allure.title("Проверка, что после заказа меняется счетик бургеров за все время")
     def test_order_number_in_all_time_orders_calculator(self, driver, unique_user):
-        driver.get(f"{BASE_URL}/login")
-        driver.implicitly_wait(4)
+        driver.get(LOGIN_URL)
 
         login_page_object = LoginPageObject(driver)
         order_page_object = OrderPageObject(driver)
         main_page_object = MainPageObject(driver)
 
         with allure.step("Логин в аккаунт"):
-            login_page_object.login(unique_user["email"], unique_user["password"])
+            input_email = unique_user["email"]
+            input_password = unique_user["password"]
+
+            login_page_object.login(input_email, input_password)
 
         with allure.step("идем в лист заказов и запоминаем количество заказов"):
             order_page_object.go_to_orders_feed()
@@ -34,13 +35,14 @@ class TestOrderNumberInAllTimeOrders:
         with allure.step("оформление заказа и проверка модальника 'идентификатор заказа'"):
             main_page_object.complete_order()
 
-        with allure.step("ждём, пока текст обновится и станет не 9999 - это без time.sleep(2) не работает"):
-            time.sleep(2)
+        # NOTE: костыль для предотвращения получения ошибки ElementClickInterceptedException
+        time.sleep(3)
+
+        with allure.step("ждём, пока текст обновится и станет не 9999"):
             main_page_object.wait_for_order_number_updated()
 
         with allure.step("сохраняем текст из веб-элемента в переменную"):
-            order_number = main_page_object.get_order_number()
-            print(f"Номер заказа: {order_number}")
+            main_page_object.get_order_number()
 
         with allure.step("закрываем модальник"):
             main_page_object.close_modal()
@@ -50,9 +52,6 @@ class TestOrderNumberInAllTimeOrders:
 
         with allure.step("сохраняем новое количество заказов после оформления"):
             new_all_time_ready_orders = order_page_object.get_all_time_ready_orders_count()
-
-        with allure.step("принтим старое и новое количество для отладки"):
-            print(f"Количество заказов ДО: {all_time_ready_orders}, ПОСЛЕ: {new_all_time_ready_orders}")
 
         with allure.step("ассерт — убеждаемся, что количество заказов увеличилось"):
             assert int(new_all_time_ready_orders) > int(all_time_ready_orders), "Количество заказов не увеличилось после оформления нового!"

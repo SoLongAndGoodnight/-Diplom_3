@@ -1,15 +1,13 @@
 import allure
 from pages.login_page import LoginPageObject
 from pages.restore_password_page import RestorePasswordPageObject
-
-BASE_URL = "https://stellarburgers.nomoreparties.site/login"
+from urls import LOGIN_URL
 
 
 class TestResetPassword:
     @allure.title("Проверка функционала для смены пароля")
     def test_reset_password(self, driver):
-        driver.get(BASE_URL)
-        driver.implicitly_wait(3)
+        driver.get(LOGIN_URL)
 
         login_page_object = LoginPageObject(driver)
         restore_password_page_object = RestorePasswordPageObject(driver)

@@ -2,15 +2,13 @@ import allure
 
 from pages.main_page import MainPageObject
 from pages.order_page import OrderPageObject
-
-BASE_URL = "https://stellarburgers.nomoreparties.site"
+from urls import BASE_URL
 
 
 class TestOrdersModalIsOpen:
     @allure.title("Проверка, что по клику на заказ, отображается модальное окно")
     def test_orders_list_modal_is_open(self, driver):
         driver.get(BASE_URL)
-        driver.implicitly_wait(5)
 
         main_page_object = MainPageObject(driver)
         order_page_object = OrderPageObject(driver)

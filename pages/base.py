@@ -30,8 +30,8 @@ class BasePageObject:
         return self.find_element_by_locator(locator)
 
     def drag_and_drop(self, source_locator: tuple[ByType, str], target_locator: tuple[ByType, str]):
-        source_element = self.find_element_by_locator(source_locator)
-        target_element = self.find_element_by_locator(target_locator)
+        source_element = self.find_visible_element_by_locator(source_locator)
+        target_element = self.find_visible_element_by_locator(target_locator)
 
         actions = ActionChains(self.driver)
         actions.drag_and_drop(source_element, target_element).perform()
