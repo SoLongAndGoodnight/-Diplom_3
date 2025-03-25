@@ -21,4 +21,4 @@ class TestSwipeConstructorAndOrdersPage:
             main_page_object.go_to_constructor()
 
         with allure.step("Проверяем, что элемент 'Конструктор заказов' виден"):
-            main_page_object.constructor_page_is_displayed()
+            assert main_page_object.constructor_page_is_displayed()

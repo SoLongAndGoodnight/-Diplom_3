@@ -24,4 +24,4 @@ class TestAccountGoToHistory:
             account_page_object.click_order_history()
 
         with allure.step("Проверяем, что ссылка стала активной (появился нужный класс)"):
-            account_page_object.active_link()
+            assert account_page_object.active_link_displayed()

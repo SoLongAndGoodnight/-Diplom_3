@@ -1,4 +1,3 @@
-from selenium.webdriver.support.ui import WebDriverWait
 import allure
 from pages.main_page import MainPageObject
 from urls import BASE_URL
@@ -18,5 +17,4 @@ class TestDragBunToCart:
             main_page.drag_and_drop_bun_to_cart()
 
         with allure.step("Проверяем, что счетчик булок увеличился до 2"):
-            WebDriverWait(driver, 5).until(lambda d: main_page.get_bun_counter() == "2")
             assert main_page.get_bun_counter() == "2", "Счетчик не увеличился до 2!"

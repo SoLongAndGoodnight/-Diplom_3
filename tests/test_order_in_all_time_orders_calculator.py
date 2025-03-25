@@ -22,7 +22,7 @@ class TestOrderNumberInAllTimeOrders:
             login_page_object.login(input_email, input_password)
 
         with allure.step("идем в лист заказов и запоминаем количество заказов"):
-            order_page_object.go_to_orders_feed()
+            main_page_object.go_to_orders_feed()
             all_time_ready_orders = order_page_object.get_all_time_ready_orders_count()
 
         with allure.step("идем в конструктор"):
@@ -48,7 +48,7 @@ class TestOrderNumberInAllTimeOrders:
             main_page_object.close_modal()
 
         with allure.step("явное ожидание, чтобы элемент гарантированно был кликабельным"):
-            order_page_object.go_to_orders_feed()
+            main_page_object.go_to_orders_feed()
 
         with allure.step("сохраняем новое количество заказов после оформления"):
             new_all_time_ready_orders = order_page_object.get_all_time_ready_orders_count()

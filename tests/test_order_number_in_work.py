@@ -43,7 +43,7 @@ class TestOrderNumber:
             main_page_object.close_modal()
 
         with allure.step("Кликаем на Лист заказов"):
-            order_page_object.go_to_orders_feed()
+            main_page_object.go_to_orders_feed()
 
         orders_in_work = order_page_object.get_orders_in_work()
 

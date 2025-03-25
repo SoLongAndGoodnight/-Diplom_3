@@ -31,8 +31,9 @@ class MainPageObject(BasePageObject):
 
     def close_modal(self):
         self.wait_until_element_to_be_clickable(MainPageLocators.CLOSE_MODAL_BUTTON)
-        element = self.find_visible_element_by_locator(MainPageLocators.CLOSE_MODAL_BUTTON)
-        element.click()
+        #element = self.find_visible_element_by_locator(MainPageLocators.CLOSE_MODAL_BUTTON)
+        return self.find_clickable_element_by_locator(MainPageLocators.CLOSE_MODAL_BUTTON).click()
+        #element.click()
 
     def is_modal_closed(self):
         self.wait_until_element_invisible(MainPageLocators.MODAL_WRAPPER)
@@ -62,4 +63,13 @@ class MainPageObject(BasePageObject):
 
     def constructor_page_is_displayed(self):
         constructor_page = self.find_visible_element_by_locator(MainPageLocators.CONSTRUCTOR_PAGE)
-        assert constructor_page.is_displayed()
+        return constructor_page.is_displayed()
+
+    def go_to_orders_feed(self):
+        self.find_visible_element_by_locator(MainPageLocators.LIST_FOR_ORDERS, timeout=10).click()
+
+    def last_order_number_is_displayed(self, last_order_number):
+        element = self.find_visible_element_by_locator(
+            MainPageLocators.get_last_order_number_locator(last_order_number)
+        )
+        return element.is_displayed()

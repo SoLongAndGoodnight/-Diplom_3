@@ -39,6 +39,10 @@ class MainPageLocators:
     BUTTON_COMPLETE_ORDER = (By.XPATH, '//button[contains(text(), "Оформить заказ")]')
     LIST_FOR_ORDERS = (By.XPATH, '//p[contains(text(), "Лента Заказов")]')
 
+    @staticmethod
+    def get_last_order_number_locator(last_order_number):
+        return By.XPATH, f'//ul/li/a/div[1]/p[contains(text(), "{last_order_number}")]'
+
 
 class OrderListsLocators:
     FIRST_ORDER_IN_LIST = (By.CSS_SELECTOR, 'main ul > li:first-child')
@@ -52,6 +56,3 @@ class OrderListsLocators:
     def get_order_number_locator(order_number):
         return By.XPATH, f'//ul/li/a/div[1]/p[contains(text(), "{order_number}")]'
 
-    @staticmethod
-    def get_last_order_number_locator(last_order_number):
-        return By.XPATH, f'//ul/li/a/div[1]/p[contains(text(), "{last_order_number}")]'

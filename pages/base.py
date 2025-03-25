@@ -22,11 +22,15 @@ class BasePageObject:
     def wait_until_element_text_changed(self, locator: tuple[ByType, str], text: str, timeout: int = 3):
         WebDriverWait(self.driver, timeout).until(text_to_changed_in_element(locator, text))
 
-    def wait_until_element_to_be_clickable(self, locator: tuple[ByType, str], timeout: int = 3):
+    def wait_until_element_to_be_clickable(self, locator: tuple[ByType, str], timeout: int = 4):
         WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
     def find_visible_element_by_locator(self, locator: tuple[ByType, str], timeout: int = 3) -> WebElement:
         self.wait_until_element_visible(locator, timeout=timeout)
+        return self.find_element_by_locator(locator)
+
+    def find_clickable_element_by_locator(self, locator: tuple[ByType, str], timeout: int = 3) -> WebElement:
+        self.wait_until_element_to_be_clickable(locator, timeout=timeout)
         return self.find_element_by_locator(locator)
 
     def drag_and_drop(self, source_locator: tuple[ByType, str], target_locator: tuple[ByType, str]):

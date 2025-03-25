@@ -10,7 +10,7 @@ class AccountPageObject(BasePageObject):
     def click_order_history(self):
         self.find_visible_element_by_locator(AccountPageLocators.ORDER_HISTORY).click()
 
-    def active_link(self):
+    def active_link_displayed(self):
         return self.find_element_by_locator(AccountPageLocators.ACTIVE_ORDER_HISTORY).is_displayed()
 
     def exit_button_displayed(self):

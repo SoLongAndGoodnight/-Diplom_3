@@ -4,7 +4,6 @@ import allure
 from pages.login_page import LoginPageObject
 from pages.main_page import MainPageObject
 from pages.account_page import AccountPageObject
-from pages.order_page import OrderPageObject
 from urls import LOGIN_URL
 
 
@@ -16,7 +15,6 @@ class TestOrder:
         login_page_object = LoginPageObject(driver)
         main_page_object = MainPageObject(driver)
         account_page_object = AccountPageObject(driver)
-        order_page_object = OrderPageObject(driver)
 
         with allure.step("Логин в аккаунт"):
             input_email = unique_user["email"]
@@ -47,7 +45,7 @@ class TestOrder:
             last_order_number = account_page_object.get_last_order_number()
 
         with allure.step("Переходим в ленту заказов"):
-            order_page_object.go_to_orders_feed()
+            main_page_object.go_to_orders_feed()
 
-        with allure.step("Ожидаем появления заказа с нашим номером в ленте заказов"):
-            order_page_object.wait_for_order_number_in_orders_line_is_visible(last_order_number)
+        with allure.step("Проверяем появление заказа с нашим номером в ленте заказов"):
+            assert main_page_object.last_order_number_is_displayed(last_order_number)
