@@ -30,10 +30,9 @@ class MainPageObject(BasePageObject):
         return self.find_visible_element_by_locator(MainPageLocators.MODAL_BUN).is_displayed()
 
     def close_modal(self):
-        self.wait_until_element_to_be_clickable(MainPageLocators.CLOSE_MODAL_BUTTON)
-        #element = self.find_visible_element_by_locator(MainPageLocators.CLOSE_MODAL_BUTTON)
-        return self.find_clickable_element_by_locator(MainPageLocators.CLOSE_MODAL_BUTTON).click()
-        #element.click()
+        self.wait_until_element_invisible(MainPageLocators.MODAL_OVERLAY, timeout=5)
+        element = self.find_clickable_element_by_locator(MainPageLocators.CLOSE_MODAL_BUTTON)
+        return element.click()
 
     def is_modal_closed(self):
         self.wait_until_element_invisible(MainPageLocators.MODAL_WRAPPER)
@@ -51,7 +50,8 @@ class MainPageObject(BasePageObject):
         self.wait_until_element_text_changed(MainPageLocators.ORDER_NUMBER_FOR_SAVE, "9999", timeout=7)
 
     def get_order_number(self):
-        return self.find_visible_element_by_locator(MainPageLocators.ORDER_NUMBER_FOR_SAVE).text
+        element = self.find_visible_element_by_locator(MainPageLocators.ORDER_NUMBER_FOR_SAVE)
+        return element.text
 
     def click_orders_button(self):
         element = self.find_visible_element_by_locator(MainPageLocators.ORDERS_BUTTON)

@@ -20,7 +20,7 @@ class BasePageObject:
         WebDriverWait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
 
     def wait_until_element_text_changed(self, locator: tuple[ByType, str], text: str, timeout: int = 3):
-        WebDriverWait(self.driver, timeout).until(text_to_changed_in_element(locator, text))
+        WebDriverWait(self.driver, timeout).until(text_to_be_changed_in_element(locator, text))
 
     def wait_until_element_to_be_clickable(self, locator: tuple[ByType, str], timeout: int = 4):
         WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
@@ -41,9 +41,14 @@ class BasePageObject:
         actions.drag_and_drop(source_element, target_element).perform()
 
 
-def text_to_changed_in_element(locator, text_):
+def text_to_be_changed_in_element(locator, text_, treat_blank_as_not_changed=True):
     def _predicate(driver):
-        element_text = driver.find_element(*locator).text
-        return text_ != element_text
+        element = driver.find_element(*locator)
+        element_text = element.text
+
+        if treat_blank_as_not_changed and element_text == "":
+            return False
+        else:
+            return text_ != element_text
 
     return _predicate

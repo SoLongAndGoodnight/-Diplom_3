@@ -28,6 +28,7 @@ class MainPageLocators:
     MODAL_BUN = (By.XPATH, '//h2[contains(text(), "Детали ингредиента")]')
     CLOSE_MODAL_BUTTON = (By.XPATH, '//button[@type="button" and contains(@class, "Modal_modal__close")]')
     MODAL_WRAPPER = (By.XPATH, '//div[contains(@class, "undefined mb-4")]')
+    MODAL_OVERLAY = (By.XPATH, '//div[contains(@class, "Modal_modal__P3_V5")]')
     CONSTRUCTOR_BUTTON = (By.XPATH, "//a[@href='/']")
     ORDERS_BUTTON = (By.XPATH, "//a[@href='/feed']")
     ORDERS_PAGE = (By.XPATH, '//h1[contains(text(), "Лента заказов")]')

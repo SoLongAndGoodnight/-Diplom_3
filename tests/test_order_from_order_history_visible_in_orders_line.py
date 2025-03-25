@@ -1,5 +1,3 @@
-import time
-
 import allure
 from pages.login_page import LoginPageObject
 from pages.main_page import MainPageObject
@@ -31,8 +29,11 @@ class TestOrder:
         with allure.step("Оформление заказа и проверка модальника 'идентификатор заказа'"):
             main_page_object.complete_order()
 
-        # NOTE: костыль для предотвращения получения ошибки ElementClickInterceptedException
-        time.sleep(3)
+        with allure.step("ждём, пока текст обновится и станет не 9999"):
+            main_page_object.wait_for_order_number_updated()
+
+        with allure.step("сохраняем текст из веб-элемента в переменную"):
+            main_page_object.get_order_number()
 
         with allure.step("закрываем модальник"):
             main_page_object.close_modal()
